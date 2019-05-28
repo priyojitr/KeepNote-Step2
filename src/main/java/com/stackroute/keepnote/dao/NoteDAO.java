@@ -16,6 +16,6 @@ public interface NoteDAO {
 
 	public Note getNoteById(int noteId);
 
-	public boolean UpdateNote(Note note);
+	public boolean updateNote(Note note);
 
 }

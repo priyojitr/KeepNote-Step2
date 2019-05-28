@@ -93,7 +93,7 @@ public class NoteControllerTest {
 	public void testUpdateNoteSuccess() throws Exception {
 
 		note.setNoteContent("Update test cases for NoteController");
-		when(noteDao.UpdateNote(any())).thenReturn(true);
+		when(noteDao.updateNote(any())).thenReturn(true);
 		mockMvc.perform(post("/update").param("noteId", "1").param("noteTitle", note.getNoteTitle())
 				.param("noteContent", note.getNoteContent()).param("noteStatus", note.getNoteStatus()))
 				.andExpect(status().isFound()).andExpect(redirectedUrl("/"));

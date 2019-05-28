@@ -1,11 +1,17 @@
 package com.stackroute.keepnote.controller;
 
+import com.stackroute.keepnote.dao.NoteDAO;
+
 /*
  * Annotate the class with @Controller annotation.@Controller annotation is used to mark 
  * any POJO class as a controller so that Spring can recognize this class as a Controller
  */
 
 public class NoteController {
+
+	public NoteController(NoteDAO noteDao) {
+		// TODO Auto-generated constructor stub
+	}
 	/*
 	 * From the problem statement, we can understand that the application requires
 	 * us to implement the following functionalities.
