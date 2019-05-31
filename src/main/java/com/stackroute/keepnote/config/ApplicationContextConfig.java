@@ -6,8 +6,10 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -29,6 +31,9 @@ public class ApplicationContextConfig {
 	public ApplicationContextConfig() {
 		// default constructor created for PMD
 	}
+	
+	@Autowired
+	private Environment env;
 
 	/*
 	 * Define the bean for DataSource. In our application, we are using MySQL as the
@@ -58,8 +63,8 @@ public class ApplicationContextConfig {
 		// comment out below block for localhost execution
 		ds.setUrl("jdbc:mysql://" + System.getenv("MYSQL_HOST") + ":3306/" + System.getenv("MYSQL_DATABASE")
 				+ "?verifyServerCertificate=false&useSSL=false&requireSSL=false");
-		ds.setUsername(System.getenv("MYSQL_USER"));
-		ds.setPassword(System.getenv("MYSQL_PASSWORD"));
+		ds.setUsername(env.getProperty("MYSQL_USER"));
+		ds.setPassword(env.getProperty("MYSQL_PASSWORD"));
 		return ds;
 	}
 
