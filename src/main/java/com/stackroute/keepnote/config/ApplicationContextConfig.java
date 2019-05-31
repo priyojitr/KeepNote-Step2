@@ -56,15 +56,15 @@ public class ApplicationContextConfig {
 		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
 		// commented out localhost configuration of MYSQL for hobbes evaluation
-		ds.setUrl("jdbc:mysql://localhost:3306/keepnoteapp?verifyServerCertificate=false&useSSL=false&requireSSL=false");
-		ds.setUsername("root");
-		ds.setPassword("root");
+		//ds.setUrl("jdbc:mysql://localhost:3306/keepnoteapp?verifyServerCertificate=false&useSSL=false&requireSSL=false")
+		//ds.setUsername("root")
+		//ds.setPassword("root")
 
 		// comment out below block for localhost execution
-		//ds.setUrl("jdbc:mysql://" + System.getenv("MYSQL_HOST") + ":3306/" + System.getenv("MYSQL_DATABASE")
-		//		+ "?verifyServerCertificate=false&useSSL=false&requireSSL=false");
-		//ds.setUsername(env.getProperty("MYSQL_USER"));
-		//ds.setPassword(env.getProperty("MYSQL_PASSWORD"));
+		ds.setUrl("jdbc:mysql://" + System.getenv("MYSQL_HOST") + ":3306/" + System.getenv("MYSQL_DATABASE")
+				+ "?verifyServerCertificate=false&useSSL=false&requireSSL=false");
+		ds.setUsername(env.getProperty("MYSQL_USER"));
+		ds.setPassword(env.getProperty("MYSQL_PASSWORD"));
 		return ds;
 	}
 
