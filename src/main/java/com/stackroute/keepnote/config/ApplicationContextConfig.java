@@ -58,8 +58,8 @@ public class ApplicationContextConfig {
 		// comment out below block for localhost execution
 		ds.setUrl("jdbc:mysql://" + System.getenv("MYSQL_HOST") + ":3306/" + System.getenv("MYSQL_DATABASE")
 				+ "?verifyServerCertificate=false&useSSL=false&requireSSL=false");
-		ds.setUsername("MYSQL_USER");
-		ds.setPassword("MYSQL_PASSWORD");
+		ds.setUsername(System.getenv("MYSQL_USER"));
+		ds.setPassword(System.getenv("MYSQL_PASSWORD"));
 		return ds;
 	}
 
