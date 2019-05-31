@@ -11,6 +11,10 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  */
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+	
+	public WebAppInitializer() {
+		// default constructor for PMD
+	}
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {

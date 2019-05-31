@@ -95,7 +95,7 @@ public class NoteDAOImplTest {
 		noteData.setNoteContent("Unit testing for DAO layer");
 		noteData.setNoteStatus("Completed");
 		noteData.setCreatedAt(LocalDateTime.now());
-		boolean status = noteDAO.updateNote(noteData);
+		boolean status = noteDAO.UpdateNote(noteData);
 		Note updatedNote = noteDAO.getNoteById(noteData.getNoteId());
 		assertEquals("Unit testing for DAO layer", updatedNote.getNoteContent());
 		assertEquals(true, status);

@@ -84,7 +84,7 @@ public class NoteDAOImpl implements NoteDAO {
 
 	/* Update existing note */
 
-	public boolean updateNote(final Note note) {
+	public boolean UpdateNote(final Note note) {
 		if(null == this.getNoteById(note.getNoteId())) {
 			return Boolean.FALSE;
 		}

@@ -22,6 +22,10 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = { "com.stackroute.keepnote" })
 public class WebMvcConfig implements WebMvcConfigurer {
 	
+	public WebMvcConfig() {
+		// default constructor created for PMD
+	}
+	
 	/*
 	 * Define the bean for view resolver so that it can be used to resolve the JSP
 	 * files which are existing in /WEB-INF/views folder. A ViewResolver is capable
