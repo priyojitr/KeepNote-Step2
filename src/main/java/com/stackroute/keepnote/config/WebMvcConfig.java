@@ -22,19 +22,15 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = { "com.stackroute.keepnote" })
 public class WebMvcConfig implements WebMvcConfigurer {
 	
-	private WebMvcConfig() {
-		// private constructor to restrict implicit one
-	}
-
 	/*
 	 * Define the bean for view resolver so that it can be used to resolve the JSP
 	 * files which are existing in /WEB-INF/views folder. A ViewResolver is capable
 	 * of mapping logical view names to actual views, such as a JSP or a HTML page.
 	 */
 	@Bean
-	public static InternalResourceViewResolver viewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("");
+	public InternalResourceViewResolver viewResolver() {
+		final InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
 		resolver.setViewClass(JstlView.class);
 		return resolver;

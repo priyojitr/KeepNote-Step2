@@ -30,7 +30,7 @@ public class NoteDAOImpl implements NoteDAO {
 	@Autowired
 	private final SessionFactory sessionFactory;
 
-	public NoteDAOImpl(SessionFactory sessionFactory) {
+	public NoteDAOImpl(final SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
@@ -38,8 +38,8 @@ public class NoteDAOImpl implements NoteDAO {
 	 * Save the note in the database(note) table.
 	 */
 
-	public boolean saveNote(Note note) {
-		Session session = this.sessionFactory.getCurrentSession();
+	public boolean saveNote(final Note note) {
+		final Session session = this.sessionFactory.getCurrentSession();
 		session.save(note);
 		session.flush();
 		return Boolean.TRUE;
@@ -50,11 +50,11 @@ public class NoteDAOImpl implements NoteDAO {
 	 * Remove the note from the database(note) table.
 	 */
 
-	public boolean deleteNote(int noteId) {
+	public boolean deleteNote(final int noteId) {
 		if(null == this.getNoteById(noteId)) {
 			return Boolean.FALSE;
 		}
-		Session session = this.sessionFactory.getCurrentSession();
+		final Session session = this.sessionFactory.getCurrentSession();
 		session.delete(this.getNoteById(noteId));
 		session.flush();
 		return Boolean.TRUE;
@@ -74,9 +74,9 @@ public class NoteDAOImpl implements NoteDAO {
 	/*
 	 * retrieve specific note from the database(note) table
 	 */
-	public Note getNoteById(int noteId) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Note note = session.get(Note.class, noteId);
+	public Note getNoteById(final int noteId) {
+		final Session session = this.sessionFactory.getCurrentSession();
+		final Note note = session.get(Note.class, noteId);
 		session.flush();
 		return note;
 
@@ -84,11 +84,11 @@ public class NoteDAOImpl implements NoteDAO {
 
 	/* Update existing note */
 
-	public boolean updateNote(Note note) {
+	public boolean updateNote(final Note note) {
 		if(null == this.getNoteById(note.getNoteId())) {
 			return Boolean.FALSE;
 		}
-		Session session = this.sessionFactory.getCurrentSession();
+		final Session session = this.sessionFactory.getCurrentSession();
 		session.clear();
 		session.update(note);
 		session.flush();

@@ -18,7 +18,7 @@ import javax.persistence.Id;
 public class Note {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int noteId;
 	private String noteTitle;
 	private String noteContent;
@@ -31,7 +31,8 @@ public class Note {
 		// empty constructor (default)
 	}
 
-	public Note(int noteId, String noteTitle, String noteContent, String noteStatus, LocalDateTime createdAt) {
+	public Note(final int noteId, final String noteTitle, final String noteContent, final String noteStatus,
+			final LocalDateTime createdAt) {
 		this.noteId = noteId;
 		this.noteTitle = noteTitle;
 		this.noteContent = noteContent;
@@ -59,24 +60,28 @@ public class Note {
 		return this.noteStatus;
 	}
 
-	public void setNoteId(int noteId) {
+	public void setNoteId(final int noteId) {
 		this.noteId = noteId;
 	}
 
-	public void setNoteTitle(String noteTitle) {
+	public void setNoteTitle(final String noteTitle) {
 		this.noteTitle = noteTitle;
 	}
 
-	public void setNoteContent(String noteContent) {
+	public void setNoteContent(final String noteContent) {
 		this.noteContent = noteContent;
 	}
 
-	public void setNoteStatus(String noteStatus) {
+	public void setNoteStatus(final String noteStatus) {
 		this.noteStatus = noteStatus;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(final LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+	
+	public LocalDateTime getCreatedAt() {
+		return this.createdAt;
 	}
 
 }

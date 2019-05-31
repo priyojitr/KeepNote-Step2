@@ -7,7 +7,6 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -25,12 +24,7 @@ import com.stackroute.keepnote.model.Note;
  * */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = { "com.stackroute.keepnote" })
 public class ApplicationContextConfig {
-
-	private ApplicationContextConfig() {
-		// private constructor to restrict implicit creation
-	}
 
 	/*
 	 * Define the bean for DataSource. In our application, we are using MySQL as the
@@ -47,13 +41,21 @@ public class ApplicationContextConfig {
 	 * dataSource.setUsername(System.getenv("MYSQL_USER"))
 	 * dataSource.setPassword(System.getenv("MYSQL_PASSWORD"))
 	 */
-	@Bean(value = "datasource")
-	public static DataSource ds() {
-		BasicDataSource ds = new BasicDataSource();
-		ds.setDriverClassName("driver class");
-		ds.setUrl("sql url");
-		ds.setUsername("username");
-		ds.setPassword("password");
+	@Bean
+	public DataSource dataSource() {
+		final BasicDataSource ds = new BasicDataSource();
+		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
+
+		// commented out localhost configuration of MYSQL for hobbes evaluation
+		// ds.setUrl("jdbc:mysql://localhost:3306/keepnoteapp?verifyServerCertificate=false&useSSL=false&requireSSL=false")
+		// ds.setUsername("root")
+		// ds.setPassword("root")
+
+		// comment out below block for localhost execution
+		ds.setUrl("jdbc:mysql://" + System.getenv("MYSQL_HOST") + ":3306/" + System.getenv("MYSQL_DATABASE")
+				+ "?verifyServerCertificate=false&useSSL=false&requireSSL=false");
+		ds.setUsername("MYSQL_USER");
+		ds.setPassword("MYSQL_PASSWORD");
 		return ds;
 	}
 
@@ -62,10 +64,10 @@ public class ApplicationContextConfig {
 	 * class through which we get sessions and perform database operations.
 	 */
 	@Bean
-	public static LocalSessionFactoryBean sessionFactoryBean(DataSource dataSource) {
-		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+	public LocalSessionFactoryBean sessionFactory(final DataSource dataSource) {
+		final LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 		sessionFactoryBean.setDataSource(dataSource);
-		Properties hibernateProps = new Properties();
+		final Properties hibernateProps = new Properties();
 		hibernateProps.put("hibernate.show_sql", "true");
 		hibernateProps.put("hibernate.hmb2ddl.auto", "update");
 		hibernateProps.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
@@ -83,7 +85,7 @@ public class ApplicationContextConfig {
 	 * ensures data integrity.
 	 */
 	@Bean
-	public static HibernateTransactionManager transMgr(SessionFactory sessionFactory) {
+	public HibernateTransactionManager transactionManager(final SessionFactory sessionFactory) {
 		return new HibernateTransactionManager(sessionFactory);
 	}
 }
